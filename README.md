@@ -144,6 +144,12 @@ This verifies Prometheus metrics scraping.
 
 ---
 
+## Local Kubernetes Note
+
+Docker Desktop Kubernetes does not automatically provision cloud LoadBalancer IPs. Therefore, Grafana and Prometheus were accessed locally using kubectl port-forward and NodePort services.
+
+---
+
 ## Cleanup
 
 ```bash
