@@ -110,6 +110,11 @@ const frontendService = new k8s.core.v1.Service("frontend", {
     metadata: {
         labels: frontendDeployment.metadata.labels,
         name: "frontend",
+	annotations: {
+		"prometheus.io/scrape": "true",
+		"prometheus.io/port": "80",
+		"prometheus.io/path": "/",
+			}
     },
     spec: {
         type: isMinikube ? "ClusterIP" : "LoadBalancer",
@@ -153,7 +158,7 @@ const grafana = new k8s.helm.v3.Chart("grafana", {
         adminUser: "admin",
         adminPassword: "admin123",
         service: {
-            type: "LoadBalancer",
+            type: "NodePort",
         },
     },
 });
